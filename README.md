@@ -27,7 +27,7 @@ Setup
 
 You don't need to know any of the following just to contribute slides.
 
-The infoscreen machine (hereafter called `pltc`) runs on a Raspberry
+The infoscreen machine (hereafter called `pltc-pi`) runs on a Raspberry
 Pi.  Contact @zfnmxt for access information.  On startup, the user
 `infoscreen` is logged into a session that runs the script
 `.xsessionrc`.  We have put the `.xsessionrc` in this repository; see
