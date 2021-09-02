@@ -20,7 +20,7 @@ tmux kill-session -t kantinfo
 
 # Start a new tmux running the kantinfo script.
 dbus-launch tmux new-session -s kantinfo -d \
-            'cd kantinfo; ./kantinfo.py ../infoscreen/content; bash'
+            'cd kantinfo; ./kantinfo.py ../pltc-infoscreen/content; bash'
 
 # Start the barebones window manager.
 matchbox-window-manager -use_titlebar no
