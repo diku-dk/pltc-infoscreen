@@ -47,7 +47,7 @@ Our `xsessionrc` has these dependencies:
 
 Other slides may have more dependencies:
 
-  + `toilet`: Tekst-formatterings-program
+  + `toilet`: Text formatting program.
   + `lxterminal` with font size 33; we've attached a `lxterminal.conf` in
     the `system`-directory, which should be symlinked from `~/.config/lxterminal/`.
   + The fonts Gentium og Comfortaa.
