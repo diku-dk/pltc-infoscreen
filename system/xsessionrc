@@ -3,7 +3,7 @@
 # Start a new xsession.
 
 # Be boring.
-xsetroot -solid white
+xsetroot -solid black
 
 # We might have some local binaries in ~/bin/, e.g. a custom surf.
 export PATH=/home/infoscreen/bin:/usr/local/bin:$PATH
