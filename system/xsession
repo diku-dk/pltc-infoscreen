@@ -5,6 +5,9 @@
 # Be boring.
 xsetroot -solid black
 
+# Disable monitor blanking
+xset s off -dpms
+
 # We might have some local binaries in ~/bin/, e.g. a custom surf.
 export PATH=/home/infoscreen/bin:/usr/local/bin:$PATH
 
