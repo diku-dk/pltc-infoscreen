@@ -1,6 +1,31 @@
+# Please read the comments!
 { config, pkgs, lib, ... }:
-
 {
+  # Boot
+  boot.loader.grub.enable = false;
+  boot.loader.raspberryPi.enable = true;
+  boot.loader.raspberryPi.version = 4;
+
+  # Kernel configuration
+  boot.kernelPackages = pkgs.linuxPackages_rpi4;
+  boot.kernelParams = ["cma=64M" "console=tty0"];
+
+  # Enable additional firmware (such as Wi-Fi drivers).
+  hardware.enableRedistributableFirmware = true;
+
+  # Filesystems
+  fileSystems = {
+      # There is no U-Boot on the Pi 4 (yet) -- the firmware partition has to be mounted as /boot.
+      "/boot" = {
+          device = "/dev/disk/by-label/FIRMWARE";
+          fsType = "vfat";
+      };
+      "/" = {
+          device = "/dev/disk/by-label/NIXOS_SD";
+          fsType = "ext4";
+      };
+  };
+
   users = {
     defaultUserShell = pkgs.zsh;
     users =  {
@@ -25,6 +50,7 @@
           "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA4FAeTJKuTHjKnr2ReiaJDbBxwdTYH6M7FWTzWv0MEXsfpny9Sf0HuDOYjVFxw0kLrdlGG+HwYT1j7ReZHhTYN0cRmYsyA12iVZl3nEvdZAB1b+O7KCnJ0dXnWGRJYJQ5GLXZWCyrVGIAPiDehjnwWVDb95RhyaDcH15SseurrOmRIlrPYA4MuAhg5YwBYOPNHP3ZOPVDHXDCh852QYl00IdztD6IlqbScem8+r36Ik9XnWESdWIbEhVPg/53u7nKjH7ksRa+uX0VBaHqZ0h30l45vjA+mXE/rCnBh28kjJ88HEvXELQfkZf+KctoM8MiHUvP3jFRqICofaEXGK1LCw=="
         ];
       };
+      autossh.isNormalUser = true;
     };
   };
 
@@ -47,42 +73,11 @@
     sudo.wheelNeedsPassword = false;
   };
 
-  boot = {
-    kernelPackages = pkgs.linuxPackages_rpi4;
-    tmpOnTmpfs = true;
-    initrd.availableKernelModules = [ "usbhid" "usb_storage" ];
-    kernelParams = [
-        "8250.nr_uarts=1"
-        "console=ttyAMA0,115200"
-        "console=tty1"
-        "cma=128M"
-    ];
-
-    loader = {
-      raspberryPi = {
-        enable = true;
-        version = 4;
-      };
-      grub.enable = false;
-      generic-extlinux-compatible.enable = true;
-    };
-  };
-
-  fileSystems = {
-    "/" = {
-      device = "/dev/disk/by-label/NIXOS_SD";
-      fsType = "ext4";
-      options = [ "noatime" ];
-    };
-  };
-
   powerManagement.cpuFreqGovernor = "ondemand";
 
-  hardware.enableRedistributableFirmware = true;
-
   networking = {
-    hostName = "pltc-pi";
-    extraHosts = "45.76.37.241 abc\n107.189.30.63 nixvps\n";
+    hostName = "pltc-infoscreen";
+    extraHosts = "107.189.30.63 nixvps";
   };
 
   time.timeZone = "Europe/Copenhagen";
@@ -94,6 +89,16 @@
   };
 
   services = {
+    autossh = {
+      sessions = [
+        { extraArguments = "-N -R 9743:localhost:22 autossh@nixvps";
+          monitoringPort = 0;
+          name = "infoscreen";
+          user = "autossh";
+        }
+      ];
+    };
+
     xserver = {
       enable = true;
       displayManager = {
@@ -135,7 +140,11 @@
     systemPackages = with pkgs; [
       neovim
       git
-      python3
+      htop
+      (python3.withPackages (pypkgs: with pypkgs; [
+        pyyaml
+	pip
+      ]))
       matchbox
       xdotool
       tmux
@@ -144,8 +153,6 @@
       surf
       feh
       youtube-dl
-      python3Packages.pip
-      python3Packages.pyyaml
       termite.terminfo
     ];
 
@@ -183,5 +190,5 @@
     };
   };
 
-  system.stateVersion = "21.05";
+  system.stateVersion = "21.11";
 }
