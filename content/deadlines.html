@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+  <head>
+    <!--
+        Diasvælger
+        Copyright (C) 2024  David Udsen
+
+        This program is free software: you can redistribute it and/or modify
+        it under the terms of the GNU Affero General Public License as
+        published by the Free Software Foundation, either version 3 of the
+        License, or (at your option) any later version.
+
+        This program is distributed in the hope that it will be useful,
+        but WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+        GNU Affero General Public License for more details.
+
+        You should have received a copy of the GNU Affero General Public License
+        along with this program.  If not, see <https://www.gnu.org/licenses/>.
+      -->
+    <title>Dias</title>
+    <script>
+      const slides = [{"date": "2024-06-06",
+                       "text": "ML Family Workshop 2024"},
+                      {"date": "2024-06-02",
+                       "text": "ACM SIGPLAN International Workshop on Functional Art, Music, Modelling and Design (FARM)"}
+                     ];
+
+      window.onload = function() {
+	  const slide = slides[Math.floor(Math.random() * slides.length)];
+	  console.log(slide.date, slide.text);
+	  document.getElementById("date").innerText = slide.date;
+	  document.getElementById("text").innerText = slide.text;
+      };
+    </script>
+    <style>
+      body {
+	  background: #fff;
+	  color: #000;
+	  font-family: monospace;
+	  display: flex;
+	  flex-direction: column;
+	  justify-content: space-evenly;
+	  height: 100vh;
+	  margin: 0;
+      }
+      h1, h2 {
+          font-size: 40pt;
+      }
+      h1, h2, #date, #text {
+	  text-align: center;
+      }
+      #date {
+	  font-size: 60pt;
+      }
+      #text {
+	  font-size: 60pt;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="consider">How about submitting to</h1>
+
+    <div id="text"></div>
+    <h2 id="deadline">Deadline:</h2>
+    <div id="date"></div>
+  </body>
+</html>
