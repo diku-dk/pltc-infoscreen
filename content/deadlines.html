@@ -27,10 +27,20 @@
                      ];
 
       window.onload = function() {
-	  const slide = slides[Math.floor(Math.random() * slides.length)];
-	  console.log(slide.date, slide.text);
-	  document.getElementById("date").innerText = slide.date;
-	  document.getElementById("text").innerText = slide.text;
+	  const today = new Date();
+	  const slidesFiltered = slides.filter(slide => today < Date.parse(slide.date));
+	  let date;
+	  let text;
+	  if (slidesFiltered.length === 0) {
+	      text = 'a journal or conference';
+	      date = 'Presumably the future';
+	  } else {
+	      const slide = slidesFiltered[Math.floor(Math.random() * slides.length)];
+	      date = slide.date;
+	      text = slide.text;
+	  }
+	  document.getElementById("date").innerText = date;
+	  document.getElementById("text").innerText = text;
       };
     </script>
     <style>
