@@ -90,7 +90,6 @@
   };
 
   users = {
-    defaultUserShell = pkgs.zsh;
     users =  {
       zfnmxt = {
         isNormalUser = true;
