@@ -134,6 +134,7 @@
       feh
       youtube-dl
       termite.terminfo
+      alacritty
     ];
 
     shellAliases = { vim = "nvim"; };
