@@ -4,7 +4,7 @@
   imports =
     [ 
       <nixos-hardware/raspberry-pi/4>
-      ./hardware-configuration.nix
+      /etc/nixos/hardware-configuration.nix
     ];
 
   boot.loader.grub.enable = false;
@@ -168,7 +168,5 @@
       '';
     };
   };
-
   system.stateVersion = "24.05";
-
 }
