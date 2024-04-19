@@ -1,0 +1,14 @@
+#!/bin/sh
+
+dir=$HOME/bin/graffito
+programs=$(ls $dir | sort -R)
+duration=5
+
+while true; do
+    for x in $programs; do
+        timeout --foreground ${duration} $dir/$x
+        if [ $? -ne 124 ]; then
+            exit 1
+        fi
+    done
+done
