@@ -2,7 +2,7 @@
 
 dir=$HOME/bin/graffito
 programs=$(ls $dir | sort -R)
-duration=5
+duration=10
 
 while true; do
     for x in $programs; do
