@@ -4,6 +4,8 @@ dir=$HOME/bin/graffito
 programs=$(ls $dir | sort -R)
 duration=10
 
+sleep 1 # Give the terminal time to resize.
+
 while true; do
     for x in $programs; do
         timeout --foreground ${duration} $dir/$x
