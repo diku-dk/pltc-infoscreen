@@ -1,0 +1,5 @@
+#!/bin/sh
+
+colour=$(printf "red\ngreen\nblue\nwhite\nyellow\ncyan\nmagenta"|sort -R|head -n1)
+
+cmatrix -m -C "$colour"
