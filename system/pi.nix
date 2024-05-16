@@ -57,6 +57,7 @@
 
     xserver = {
       enable = true;
+      #desktopManager.xfce.enable = true;
       displayManager = {
         defaultSession = "infoscreen";
         session = [
@@ -135,6 +136,8 @@
       youtube-dl
       termite.terminfo
       alacritty
+      #qutebrowser
+      cmatrix
     ];
 
     shellAliases = { vim = "nvim"; };
