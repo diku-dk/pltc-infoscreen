@@ -138,6 +138,7 @@
       alacritty
       #qutebrowser
       cmatrix
+      mosml
     ];
 
     shellAliases = { vim = "nvim"; };
@@ -145,6 +146,10 @@
     variables = {
       EDITOR = "nvim";
     };
+
+    homeBinInPath = true;
+
+    localBinInPath = true;
   };
 
   programs = {
