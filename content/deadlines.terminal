@@ -31,7 +31,7 @@ when_dd=$(echo "$when" | cut -d'-' -f3)
 what=$(echo "$deadline" | cut -d' ' -f2-)
 
 futhark-banner \
-    40 5 50 "Consider submitting to" \
-    50 35 20 "$what" \
-    20 80 40 "Deadline     ${when_yyyy} ${when_mm} ${when_dd}" \
+    5 5 50 "Consider submitting to" \
+    30 35 20 "$what" \
+    5 80 40 "before ${when_yyyy} ${when_mm} ${when_dd}" \
 
