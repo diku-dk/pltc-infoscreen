@@ -1,0 +1,38 @@
+#!/bin/sh
+
+time_now=$(date +%s)
+
+timely() {
+    while read -r line; do
+        time_event=$(date +%s -d $(echo "$line" | cut -d' ' -f1))
+        if [ "$time_now" -lt "$time_event" ]; then
+            echo "$line"
+        fi
+    done
+}
+
+# TODO: fetch these from somewhere.
+deadlines=$(cat <<"EOF"
+2024-06-21 SEFM
+2024-07-11 POPL
+2024-08-05 SOSA
+2025-01-01 ISCA
+EOF
+         )
+
+timely_deadlines=$(echo "$deadlines" | timely)
+
+deadline=$(echo "$timely_deadlines" | sort -R | head -n 1)
+
+when=$(echo "$deadline" | cut -d' ' -f1)
+when_yyyy=$(echo "$when" | cut -d'-' -f1)
+when_mm=$(echo "$when" | cut -d'-' -f2)
+when_dd=$(echo "$when" | cut -d'-' -f3)
+what=$(echo "$deadline" | cut -d' ' -f2-)
+
+futhark-banner \
+    1 5 60 "Consider submitting" \
+    5 30 60 "to" \
+    25 25 30 "$what" \
+    1 60 60 "Deadline ${when_yyyy} ${when_mm} ${when_dd}" \
+
