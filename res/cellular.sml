@@ -6,20 +6,18 @@ val seed1 = ref 0.0
 
 fun out s = TextIO.output (TextIO.stdOut, s)
 
-fun clearScreen () = out ("\027[2J")
-fun clearLine () = out ("\027[2K")
-fun default () = out ("\027[0m")
-fun hideCursor () = out ("\027[?25l")
-fun showCursor () = out ("\027[?25h")
-fun home () = out ("\027[H")
+val clearScreen = "\027[2J"
+val clearLine = "\027[2K"
+val default = "\027[0m"
+val hideCursor = "\027[?25l"
+val showCursor = "\027[?25h"
+val home = "\027[H"
 fun fgRGB (r, g, b) =
-  out
-    ("\027[38;2;" ^ Int.toString r ^ ";" ^ Int.toString g ^ ";" ^ Int.toString b
-     ^ "m")
+  "\027[38;2;" ^ Int.toString r ^ ";" ^ Int.toString g ^ ";" ^ Int.toString b
+  ^ "m"
 fun bgRGB (r, g, b) =
-  out
-    ("\027[48;2;" ^ Int.toString r ^ ";" ^ Int.toString g ^ ";" ^ Int.toString b
-     ^ "m")
+  "\027[48;2;" ^ Int.toString r ^ ";" ^ Int.toString g ^ ";" ^ Int.toString b
+  ^ "m"
 
 fun randRange (min, max) rnd =
   trunc (real min + Random.random rnd * (real max - real min))
@@ -46,11 +44,11 @@ fun printLine a =
   let
     fun pixel x =
       let val (r, g, b) = (Array.sub (ctable, x))
-      in fgRGB (r, g, b); bgRGB (r, g, b); out " "
+      in fgRGB (r, g, b) ^ bgRGB (r, g, b) ^ " "
       end
   in
-    out "\n";
-    Array.app pixel a;
+    out (concat (List.tabulate (Array.length a, fn i =>
+      pixel (Array.sub (a, i)))));
     TextIO.flushOut TextIO.stdOut
   end
 
@@ -101,7 +99,7 @@ fun main args =
       )
 
   in
-    hideCursor ();
+    out hideCursor;
     loop firstGen
   end
 

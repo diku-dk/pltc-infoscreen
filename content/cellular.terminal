@@ -2,6 +2,8 @@
 
 # mosmlc is fast enough that we can just compile this every time.
 
+set -e
+
 dir=$(dirname $0)
 mosmlc "${dir}/../res/cellular.sml" -o /tmp/cellular
 /tmp/cellular
