@@ -136,7 +136,7 @@
       youtube-dl
       termite.terminfo
       alacritty
-      #qutebrowser
+      qutebrowser
       cmatrix
       mosml
     ];
