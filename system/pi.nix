@@ -125,6 +125,7 @@
       (python3.withPackages (pypkgs: with pypkgs; [
         pyyaml
 	pip
+	requests
       ]))
       matchbox
       xdotool
@@ -139,6 +140,7 @@
       qutebrowser
       cmatrix
       mosml
+
     ];
 
     shellAliases = { vim = "nvim"; };
