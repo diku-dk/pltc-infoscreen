@@ -1,0 +1,100 @@
+#!/usr/bin/env python
+
+import requests
+from operator import itemgetter
+
+TOKEN_FILENAME='../github-token.txt'
+
+# Define your GitHub personal access token
+TOKEN = open(TOKEN_FILENAME).read().strip()
+
+# GraphQL endpoint for GitHub API
+API_URL = "https://api.github.com/graphql"
+
+# Organization name (replace with the organization you want to query)
+ORG_NAME = "diku-dk"
+
+# Define the GraphQL query to get repositories and their latest commits
+query = """
+{
+  organization(login: "%s") {
+    repositories(first: 100) {
+      nodes {
+        name
+        defaultBranchRef {
+          target {
+            ... on Commit {
+              history(first: 1) {
+                edges {
+                  node {
+                    message
+                    author {
+                      name
+                    }
+                    committedDate
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+""" % ORG_NAME
+
+# Function to make a request to GitHub GraphQL API
+def run_query(query):
+    headers = {
+        "Authorization": f"Bearer {TOKEN}",
+        "Content-Type": "application/json"
+    }
+    response = requests.post(API_URL, json={'query': query}, headers=headers)
+
+    if response.status_code == 200:
+        return response.json()
+    else:
+        raise Exception(f"Query failed with status code {response.status_code}: {response.text}")
+
+# Run the query and get the result
+result = run_query(query)
+
+# Parse and collect repositories and their latest commit info
+repositories = result["data"]["organization"]["repositories"]["nodes"]
+repo_commit_info = []
+
+for repo in repositories:
+    repo_name = repo["name"]
+
+    if repo["defaultBranchRef"] and repo["defaultBranchRef"]["target"]["history"]["edges"]:
+        latest_commit = repo["defaultBranchRef"]["target"]["history"]["edges"][0]["node"]
+        commit_message = latest_commit["message"]
+        commit_author = latest_commit["author"]["name"]
+        committed_date = latest_commit["committedDate"]
+
+        repo_commit_info.append({
+            "name": repo_name,
+            "commit_message": commit_message,
+            "commit_author": commit_author,
+            "committed_date": committed_date
+        })
+
+# Sort repositories by the most recent commit date (descending order)
+repo_commit_info.sort(key=itemgetter("committed_date"), reverse=True)
+
+K = 5
+
+# Select the top K repositories with the most recent changes
+top_K_repos = repo_commit_info[:K]
+
+# Print the top 10 repositories with their latest commit messages
+
+print('')
+print('              Recent activity from diku-dk:')
+
+for repo in top_K_repos:
+    print(f"\nOn {repo['name']} by {repo['commit_author']}:")
+    print(f"  {repo['commit_message']}")
+
+
