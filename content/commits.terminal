@@ -3,7 +3,7 @@
 import requests
 from operator import itemgetter
 
-TOKEN_FILENAME='../github-token.txt'
+TOKEN_FILENAME='/home/infoscreen/github-token.txt'
 
 # Define your GitHub personal access token
 TOKEN = open(TOKEN_FILENAME).read().strip()
