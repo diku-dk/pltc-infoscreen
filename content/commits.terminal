@@ -2,6 +2,7 @@
 
 import requests
 from operator import itemgetter
+import time
 
 TOKEN_FILENAME='/home/infoscreen/github-token.txt'
 
@@ -97,4 +98,4 @@ for repo in top_K_repos:
     print(f"\nOn {repo['name']} by {repo['commit_author']}:")
     print(f"  {repo['commit_message']}")
 
-
+time.sleep(100) # Forever, really.
