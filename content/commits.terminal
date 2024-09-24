@@ -19,7 +19,7 @@ ORG_NAME = "diku-dk"
 query = """
 {
   organization(login: "%s") {
-    repositories(first: 100) {
+    repositories(first: 100, orderBy: {field: PUSHED_AT, direction: DESC}) {
       nodes {
         name
         defaultBranchRef {
