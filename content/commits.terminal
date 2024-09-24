@@ -96,6 +96,6 @@ print('              Recent activity from diku-dk:')
 
 for repo in top_K_repos:
     print(f"\n    On {repo['name']} by {repo['commit_author']}:")
-    print(f"      {repo['commit_message']}")
+    print(f"      {repo['commit_message'].split('\n')[0]}")
 
 time.sleep(100) # Forever, really.
