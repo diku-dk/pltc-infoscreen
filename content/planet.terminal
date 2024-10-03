@@ -1,0 +1,12 @@
+#!/bin/sh
+
+set -e
+
+echo "Let there be light!"
+
+SEED=$(seq 0 .000001 1 | shuf | head -n1)
+WIDTH=1920
+HEIGHT=1080
+PLANETFILE=/tmp/planet.bmp
+(cd $HOME/planet && ./planet -s $SEED -w $WIDTH -h $HEIGHT -S -o $PLANETFILE)
+feh -Z -x $PLANETFILE
