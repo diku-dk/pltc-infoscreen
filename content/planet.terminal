@@ -2,11 +2,8 @@
 
 set -e
 
-echo "Let there be light!"
+# Planet is actually generated in deadlines.terminal
 
-SEED=$(seq 0 .000001 1 | shuf | head -n1)
-WIDTH=1920
-HEIGHT=1080
+echo "Let there be light!"
 PLANETFILE=/tmp/planet.bmp
-(cd $HOME/planet && ./planet -s $SEED -w $WIDTH -h $HEIGHT -S -o $PLANETFILE)
 feh -Z -x $PLANETFILE

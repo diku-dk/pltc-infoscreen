@@ -37,8 +37,17 @@ when_mm=$(echo "$when" | cut -d'-' -f2)
 when_dd=$(echo "$when" | cut -d'-' -f3)
 what=$(echo "$deadline" | cut -d' ' -f2-)
 
+mkplanet() {
+    PLANETFILE=/tmp/planet.bmp
+    SEED=$(seq 0 .000001 1 | shuf | head -n1)
+    WIDTH=1920
+    HEIGHT=1080
+    (cd $HOME/planet && ./planet -s $SEED -w $WIDTH -h $HEIGHT -S -o $PLANETFILE)
+}
+
+mkplanet &
+
 futhark-banner \
     5 5 50 "Consider submitting to" \
     30 35 20 "$what" \
     5 80 40 "before ${when_yyyy} ${when_mm} ${when_dd}" \
-
