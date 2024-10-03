@@ -92,11 +92,11 @@ top_K_repos = repo_commit_info[:K]
 # Print the top 10 repositories with their latest commit messages
 
 print('')
-print('              Recent activity from diku-dk:')
+print('              Recent activity on diku-dk:')
 
 for repo in top_K_repos:
     msg = repo['commit_message'].split('\n')[0]
-    print(f"\n    On {repo['name']} by {repo['commit_author']}:")
+    print(f"\n    In {repo['name']} by {repo['commit_author']}:")
     print(f"      {msg}")
 
 time.sleep(100) # Forever, really.
