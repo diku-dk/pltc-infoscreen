@@ -140,6 +140,7 @@
       qutebrowser
       cmatrix
       mosml
+      zathura
 
     ];
 
