@@ -1,6 +1,6 @@
 #!/bin/sh
 
-PAPERDIR=papers/
+PAPERDIR=$(dirname $0)/../papers/
 
 PAPER=$(find $PAPERDIR -name \*.pdf | sort -R | head -n 1)
 
