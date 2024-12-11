@@ -141,7 +141,7 @@
       cmatrix
       mosml
       zathura
-
+      snowmachine
     ];
 
     shellAliases = { vim = "nvim"; };
