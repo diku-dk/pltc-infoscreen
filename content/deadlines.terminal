@@ -14,7 +14,7 @@ timely() {
 # TODO: fetch these from somewhere.
 deadlines=$(cat <<"EOF"
 2025-06-20 SEFM
-2025-06-10 POPL
+2025-07-10 POPL
 2024-08-05 SOSA
 2024-09-12 CGO
 2024-08-16 PPoPP
