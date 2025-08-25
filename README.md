@@ -21,6 +21,9 @@ Want to put something on the infoscreen?  It's easy:
   4. Make a pull request to this repository from your fork (there's a
      button on the repository).
 
+Alternatively, if you have commit access to this repository for any reason, feel
+free to just commit whatever content you wish. No friction!
+
 
 Setup
 -----
@@ -28,7 +31,7 @@ Setup
 You don't need to know any of the following just to contribute slides.
 
 The infoscreen machine (hereafter called `pltc-pi`) runs on a Raspberry
-Pi.  Contact @zfnmxt for access information.  On startup, the user
+Pi.  Contact @athas for access information.  On startup, the user
 `infoscreen` is logged into a session that runs the script
 `.xsessionrc`.  We have put the `.xsessionrc` in this repository; see
 the file `xsessionrc` n the `system` directory.
