@@ -1,0 +1,5 @@
+#!/bin/sh
+
+echo GURU MEDITATION
+echo
+ip addr
