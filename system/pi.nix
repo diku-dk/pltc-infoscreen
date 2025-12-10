@@ -10,9 +10,11 @@
   boot.loader.grub.enable = false;
   boot.loader.generic-extlinux-compatible.enable = true;
 
+  # workaround for https://github.com/NixOS/nixpkgs/issues/344963
+  boot.initrd.systemd.tpm2.enable = false;
+
   networking = {
     hostName = "pltc-infoscreen";
-    extraHosts = "107.189.30.63 nixvps";
   };
 
   time.timeZone = "Europe/Copenhagen";
@@ -47,7 +49,7 @@
   services = {
     autossh = {
       sessions = [
-        { extraArguments = "-N -R 9743:localhost:22 autossh@nixvps";
+        { extraArguments = "-N -R 9744:localhost:22 autossh@sigkill.dk";
           monitoringPort = 0;
           name = "infoscreen";
           user = "autossh";
