@@ -3,3 +3,5 @@
 echo GURU MEDITATION
 echo
 ip addr
+
+sleep 400
