@@ -1,7 +1,3 @@
 #!/bin/sh
 
-echo GURU MEDITATION
-echo
-ip addr
-
-sleep 400
+exec bash
