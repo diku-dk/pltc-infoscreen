@@ -27,6 +27,7 @@ deadlines=$(cat <<"EOF"
 2025-04-08 SPLASH
 2025-04-16 SOSP
 2025-05-31 FProPer
+2026-08-06 CoPLaWS
 EOF
          )
 
